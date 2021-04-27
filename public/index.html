@@ -1,0 +1,26 @@
+<!--
+ * @Descripttion: 
+ * @Author: Weize
+ * @Date: 2021-04-22 10:43:13
+ * @LastEditors: Weize
+ * @LastEditTime: 2021-04-27 20:56:56
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./favicon.png" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+
+  <body>
+    <div id="app"></div>
+
+    <% if (process.env.LOCAL_ENV !== 'dev') { %>
+    <script src="./common.js"></script>
+    <!-- <script src="<%= process.env.BASE_URL %>/vue.js"></script> -->
+    <% } %>
+  </body>
+</html>
