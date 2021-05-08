@@ -3,12 +3,13 @@
  * @Author: Weize
  * @Date: 2021-04-22 14:52:57
  * @LastEditors: Weize
- * @LastEditTime: 2021-04-27 21:18:09
+ * @LastEditTime: 2021-05-08 17:44:56
  */
 const path = require("path")
 const webpack = require("webpack")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const CopyPlugin = require("copy-webpack-plugin")
+const getLessVariables = require("./utils")
 const ESLintPlugin = require("eslint-webpack-plugin")
 // css文件分离
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
@@ -27,7 +28,7 @@ module.exports = (options) => {
         "vue-router": "VueRouter",
         vuex: "Vuex",
         axios: "axios",
-        "mockjs": "Mock"
+        mockjs: "Mock",
       }
     : {}
   return {
@@ -70,9 +71,20 @@ module.exports = (options) => {
           use: [
             {
               loader: MiniCssExtractPlugin.loader,
+              options: {
+                publicPath: "../../",
+              },
             },
             "css-loader",
             "less-loader",
+            {
+              loader: "less-loader",
+              options: {
+                lessOptions:{
+                  globalVars: getLessVariables(resolve("src/less/var.less")),
+                }
+              },
+            },
           ],
         },
         {
@@ -84,25 +96,26 @@ module.exports = (options) => {
           },
         },
         {
-          test: /\.(woff|svg|eot|ttf)\??.*$/,
+          test: /\.(woff|svg|eot|ttf|png|jpg|gif)\??.*$/,
+          loader: "url-loader",
           include: [resolve("src/assets"), /node_modules/],
-          use: "url-loader",
+          options: {
+            limit: 10 * 1024,
+            esModule: false,
+            name: "static/images/[name][hash:8].[ext]",
+          },
         },
         {
           test: /\.vue$/,
-          use: "vue-loader",
+          loader: "vue-loader",
         },
         {
           test: /\.js$/,
           exclude: /node_modules/,
-          use: [
-            {
-              loader: "babel-loader",
-              options: {
-                cacheDirectory: true,
-              },
-            },
-          ],
+          loader: "babel-loader",
+          options: {
+            cacheDirectory: true,
+          },
         },
       ],
     },
@@ -135,6 +148,12 @@ module.exports = (options) => {
       minimizer: [
         new TerserPlugin({
           extractComments: false, //是否需要将依赖包的注释打包成.txt输出
+          terserOptions: {
+            compress: {
+              drop_debugger: true,
+              pure_funcs: ["console.log"], // 移除console
+            },
+          },
         }),
       ],
     },

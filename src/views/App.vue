@@ -3,7 +3,7 @@
  * @Author: Weize
  * @Date: 2021-04-26 20:45:02
  * @LastEditors: Weize
- * @LastEditTime: 2021-04-27 14:59:43
+ * @LastEditTime: 2021-05-08 17:32:40
 -->
 
 <template>
@@ -22,9 +22,5 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.box {
-  .item {
-    color: blue;
-  }
-}
+
 </style>

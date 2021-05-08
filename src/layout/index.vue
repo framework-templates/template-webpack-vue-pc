@@ -3,12 +3,14 @@
  * @Author: Weize
  * @Date: 2021-04-25 09:47:37
  * @LastEditors: Weize
- * @LastEditTime: 2021-04-27 15:55:51
+ * @LastEditTime: 2021-05-08 17:30:01
 -->
 <template>
-  <div class="layout-container">
+  <div class="layout">
     <Header />
-    <Container />
+    <div class="layout-container">
+      <Container />
+    </div>
     <Footer />
   </div>
 </template>
@@ -30,4 +32,13 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="less" scoped>
+.layout {
+  width: @containerWidth;
+  margin: 0 auto;
+  &-container {
+    margin: 60px 0;
+    padding: 20px;
+  }
+}
+</style>

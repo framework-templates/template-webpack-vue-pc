@@ -3,7 +3,7 @@
  * @Author: Weize
  * @Date: 2021-04-22 09:04:17
  * @LastEditors: Weize
- * @LastEditTime: 2021-04-27 21:12:20
+ * @LastEditTime: 2021-05-07 16:03:56
  */
 import Vue from "vue"
 import App from "@/views/App"
@@ -16,7 +16,6 @@ import "@/icons"
 import "@/permission"
 console.log(process.env.Mock);
 if (process.env.Mock) {
-    console.log(12313);
   require("./mock")
 }
 
