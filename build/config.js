@@ -3,7 +3,7 @@
  * @Author: Weize
  * @Date: 2021-04-22 14:52:57
  * @LastEditors: Weize
- * @LastEditTime: 2021-05-08 17:44:56
+ * @LastEditTime: 2021-05-10 16:57:14
  */
 const path = require("path")
 const webpack = require("webpack")
@@ -79,10 +79,16 @@ module.exports = (options) => {
             "less-loader",
             {
               loader: "less-loader",
+              // options: {
+              //   lessOptions:{
+              //     globalVars: getLessVariables(resolve("src/less/var.less")),
+              //   }
+              // },
+            },
+            {
+              loader: "style-resources-loader",
               options: {
-                lessOptions:{
-                  globalVars: getLessVariables(resolve("src/less/var.less")),
-                }
+                patterns: resolve("src/less/var.less"),
               },
             },
           ],

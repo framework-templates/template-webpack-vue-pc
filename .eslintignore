@@ -2,5 +2,6 @@
 /build/
 /*.js
 /public/
+/test/
 /src/assets/
 /src/icons/svg/
